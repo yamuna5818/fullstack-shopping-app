@@ -4,13 +4,26 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
 dotenv.config();
-connectDB();
 
 const app = express();
 
 // middleware
 app.use(cors());
 app.use(express.json());
+
+// Ensure DB is connected before handling requests (required for Vercel serverless)
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    console.error('DB connection failed:', err.message);
+    res.status(503).json({
+      success: false,
+      message: 'Database unavailable. Check MONGODB_URI and try again.',
+    });
+  }
+});
 
 // routes
 app.use('/users', require('./routes/userRoutes'));
