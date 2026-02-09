@@ -1,8 +1,16 @@
 {
+  "installCommand": "cd Frontend && npm install && cd ../Backend && npm install",
   "buildCommand": "cd Frontend && npm run build",
   "outputDirectory": "Frontend/dist",
-  "installCommand": "cd Frontend && npm install",
   "rewrites": [
+    { "source": "/users", "destination": "/api" },
+    { "source": "/users/(.*)", "destination": "/api" },
+    { "source": "/items", "destination": "/api" },
+    { "source": "/items/(.*)", "destination": "/api" },
+    { "source": "/carts", "destination": "/api" },
+    { "source": "/carts/(.*)", "destination": "/api" },
+    { "source": "/orders", "destination": "/api" },
+    { "source": "/orders/(.*)", "destination": "/api" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
