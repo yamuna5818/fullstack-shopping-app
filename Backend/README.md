@@ -222,6 +222,18 @@ Yamuna_Backend/
 └── README.md              # Documentation
 ```
 
+## Deploy to Vercel
+
+1. **Create a new Vercel project** and import this repo (or the Backend folder).
+2. **Set Root Directory** to `Backend` in Project Settings → General.
+3. **Add Environment Variables** in Project Settings → Environment Variables:
+   - `MONGODB_URI` – your MongoDB connection string (e.g. MongoDB Atlas)
+   - `JWT_SECRET` – a strong secret for signing tokens
+   - `JWT_EXPIRES_IN` – e.g. `24h`
+4. Deploy. Your API will be at `https://<your-project>.vercel.app` (e.g. `/users`, `/items`, `/carts`, `/orders`).
+
+After deploying, point your frontend to this URL (e.g. set `VITE_API_URL` or update `api.js` base URL to your backend Vercel URL).
+
 ## Notes
 
 - A user can only have one active cart at a time
